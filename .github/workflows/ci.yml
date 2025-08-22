@@ -9,6 +9,12 @@ on:
     # Run daily at 2 AM UTC to keep data fresh
     - cron: '0 2 * * *'
 
+# Add permissions for the workflow
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -85,16 +91,17 @@ jobs:
     - name: Generate production data
       run: python render_data.py
       
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: .
-        publish_branch: gh-pages
-        force_orphan: true
-        # Add these options for better compatibility
-        enable_jekyll: false
-        cname: ""
+        path: '.'
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
         
     - name: Update deployment status
       run: |
