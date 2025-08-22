@@ -92,9 +92,19 @@ jobs:
         publish_dir: .
         publish_branch: gh-pages
         force_orphan: true
+        # Add these options for better compatibility
+        enable_jekyll: false
+        cname: ""
         
     - name: Update deployment status
       run: |
         echo "🚀 Deployment completed successfully!"
         echo "📅 Deployed at: $(date)"
         echo "🔗 Available at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
+        
+    - name: Verify deployment
+      run: |
+        echo "🔍 Verifying deployment..."
+        echo "Repository: ${{ github.repository }}"
+        echo "Branch: ${{ github.ref }}"
+        echo "Actor: ${{ github.actor }}"
