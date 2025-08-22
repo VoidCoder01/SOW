@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  job-dashboard:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./index.html:/app/index.html
+      - ./render_data.py:/app/render_data.py
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python render_data.py
+    restart: unless-stopped
+    
+  # Optional: Add a simple HTTP server for testing
+  web-server:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - job-dashboard
+    restart: unless-stopped
+
+volumes:
+  app-data:

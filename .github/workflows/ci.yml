@@ -1,0 +1,100 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run daily at 2 AM UTC to keep data fresh
+    - cron: '0 2 * * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Run data renderer
+      run: python render_data.py
+      
+    - name: Validate HTML output
+      run: |
+        # Check if HTML file was generated and has content
+        if [ ! -s index.html ]; then
+          echo "❌ HTML file is empty or missing"
+          exit 1
+        fi
+        
+        # Check if statistics are populated
+        if ! grep -q 'id="total-jobs">[0-9]' index.html; then
+          echo "❌ Total jobs not found in HTML"
+          exit 1
+        fi
+        
+        if ! grep -q 'id="us-jobs">[0-9]' index.html; then
+          echo "❌ US jobs not found in HTML"
+          exit 1
+        fi
+        
+        if ! grep -q 'id="remote-jobs">[0-9]' index.html; then
+          echo "❌ Remote jobs not found in HTML"
+          exit 1
+        fi
+        
+        echo "✅ HTML validation passed"
+        
+    - name: Check file size
+      run: |
+        echo "📁 Generated HTML file size:"
+        ls -lh index.html
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: generated-html
+        path: index.html
+        retention-days: 7
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Generate production data
+      run: python render_data.py
+      
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .
+        publish_branch: gh-pages
+        force_orphan: true
+        
+    - name: Update deployment status
+      run: |
+        echo "🚀 Deployment completed successfully!"
+        echo "📅 Deployed at: $(date)"
+        echo "🔗 Available at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"

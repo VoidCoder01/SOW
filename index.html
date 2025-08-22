@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Data Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .job-list {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .job-item {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .job-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .job-company {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .job-location {
+            color: #888;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+        .timestamp {
+            text-align: center;
+            color: #666;
+            font-size: 0.8em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Job Data Dashboard</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-jobs">25</div>
+                <div class="stat-label">Total Jobs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="us-jobs">14</div>
+                <div class="stat-label">US Jobs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="remote-jobs">11</div>
+                <div class="stat-label">Remote Jobs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="last-updated">25</div>
+                <div class="stat-label">Last Updated</div>
+            </div>
+        </div>
+        
+        <div class="job-list">
+            <h2>Recent Jobs</h2>
+            <div id="jobs-container">
+        <div class="job-item remote">
+            <div class="job-title">Data Scientist</div>
+            <div class="job-company">InnovateSoft</div>
+            <div class="job-location">Remote • $140k - $287k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">Cloud Architect</div>
+            <div class="job-company">CodeCraft</div>
+            <div class="job-location">Denver, CO • $132k - $256k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">QA Engineer</div>
+            <div class="job-company">TechCorp</div>
+            <div class="job-location">Remote • $184k - $311k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">Software Engineer</div>
+            <div class="job-company">DigitalDynamics</div>
+            <div class="job-location">Remote • $122k - $310k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">Backend Developer</div>
+            <div class="job-company">DigitalDynamics</div>
+            <div class="job-location">Remote • $132k - $287k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">Data Scientist</div>
+            <div class="job-company">DataFlow</div>
+            <div class="job-location">Remote • $177k - $332k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">Cloud Architect</div>
+            <div class="job-company">DigitalDynamics</div>
+            <div class="job-location">Remote • $112k - $343k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">UX Designer</div>
+            <div class="job-company">SmartSolutions</div>
+            <div class="job-location">Boston, MA • $187k - $327k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">Machine Learning Engineer</div>
+            <div class="job-company">DataFlow</div>
+            <div class="job-location">Remote • $116k - $234k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">Machine Learning Engineer</div>
+            <div class="job-company">DevWorks</div>
+            <div class="job-location">Los Angeles, CA • $186k - $250k</div>
+        </div>
+        </div>
+            <div class="job-company">TechCorp</div>
+            <div class="job-location">Remote • $186k - $227k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">System Administrator</div>
+            <div class="job-company">CloudTech</div>
+            <div class="job-location">Seattle, WA • $134k - $205k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">DevOps Engineer</div>
+            <div class="job-company">DigitalDynamics</div>
+            <div class="job-location">Remote • $200k - $335k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">DevOps Engineer</div>
+            <div class="job-company">TechCorp</div>
+            <div class="job-location">Remote • $196k - $224k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">Frontend Developer</div>
+            <div class="job-company">ByteLogic</div>
+            <div class="job-location">Remote • $82k - $280k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">Security Engineer</div>
+            <div class="job-company">CloudTech</div>
+            <div class="job-location">Remote • $133k - $217k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">Security Engineer</div>
+            <div class="job-company">DigitalDynamics</div>
+            <div class="job-location">New York, NY • $172k - $326k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">Data Engineer</div>
+            <div class="job-company">CodeCraft</div>
+            <div class="job-location">Chicago, IL • $191k - $277k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">QA Engineer</div>
+            <div class="job-company">DevWorks</div>
+            <div class="job-location">Remote • $196k - $314k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">DevOps Engineer</div>
+            <div class="job-company">DataFlow</div>
+            <div class="job-location">New York, NY • $172k - $249k</div>
+        </div>
+        </div>
+            <div class="job-company">SmartSolutions</div>
+            <div class="job-location">Remote • $179k - $260k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">Data Engineer</div>
+            <div class="job-company">TechCorp</div>
+            <div class="job-location">Portland, OR • $99k - $297k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">Product Manager</div>
+            <div class="job-company">DigitalDynamics</div>
+            <div class="job-location">Seattle, WA • $102k - $273k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">Security Engineer</div>
+            <div class="job-company">TechCorp</div>
+            <div class="job-location">Boston, MA • $92k - $216k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">System Administrator</div>
+            <div class="job-company">InnovateSoft</div>
+            <div class="job-location">Seattle, WA • $91k - $319k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">Data Scientist</div>
+            <div class="job-company">FutureSystems</div>
+            <div class="job-location">Remote • $133k - $251k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">Full Stack Developer</div>
+            <div class="job-company">DataFlow</div>
+            <div class="job-location">Seattle, WA • $101k - $317k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">Machine Learning Engineer</div>
+            <div class="job-company">CloudTech</div>
+            <div class="job-location">Remote • $126k - $311k</div>
+        </div>
+        
+        <div class="job-item remote">
+            <div class="job-title">Cloud Architect</div>
+            <div class="job-company">DataFlow</div>
+            <div class="job-location">Remote • $199k - $304k</div>
+        </div>
+        
+        <div class="job-item onsite">
+            <div class="job-title">Security Engineer</div>
+            <div class="job-company">InnovateSoft</div>
+            <div class="job-location">Los Angeles, CA • $139k - $311k</div>
+        </div>
+        </div>
+        </div>
+        
+        <div class="timestamp">
+            Last updated: <span id="update-time">2025-08-22 19:13:31</span>
+        </div>
+    </div>
+
+    <script>
+        // This will be populated by the Python script
+        // For now, just show a loading message
+        document.getElementById('jobs-container').innerHTML = '<p>Loading job data...</p>';
+    </script>
+</body>
+</html>
