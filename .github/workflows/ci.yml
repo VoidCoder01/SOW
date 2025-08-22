@@ -74,7 +74,7 @@ jobs:
         path: index.html
         retention-days: 7
 
-  deploy:
+  build:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
@@ -91,27 +91,16 @@ jobs:
     - name: Generate production data
       run: python render_data.py
       
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-      
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
       with:
-        path: '.'
+        name: production-build
+        path: index.html
+        retention-days: 30
         
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
-        
-    - name: Update deployment status
+    - name: Build summary
       run: |
-        echo "🚀 Deployment completed successfully!"
-        echo "📅 Deployed at: $(date)"
-        echo "🔗 Available at: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
-        
-    - name: Verify deployment
-      run: |
-        echo "🔍 Verifying deployment..."
-        echo "Repository: ${{ github.repository }}"
-        echo "Branch: ${{ github.ref }}"
-        echo "Actor: ${{ github.actor }}"
+        echo "🚀 Build completed successfully!"
+        echo "📅 Built at: $(date)"
+        echo "📁 Generated: index.html"
+        echo "🔍 Next step: Enable GitHub Pages manually in repository settings"
