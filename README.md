@@ -68,9 +68,9 @@ This project includes comprehensive CI/CD configurations for multiple platforms:
 
 ### 📊 **Deployment Status**
 
-[![CI/CD Pipeline](https://github.com/anushkap01patidar/SOW/workflows/CI%3ACD%20Pipeline/badge.svg)](https://github.com/anushkap01patidar/SOW/actions)
+[![CI/CD Pipeline](https://github.com/VoidCoder01/SOW/workflows/CI%3ACD%20Pipeline/badge.svg)](https://github.com/VoidCoder01/SOW/actions)
 
-**Live Site:** [https://anushkap01patidar.github.io/SOW](https://anushkap01patidar.github.io/SOW)
+**Live Site:** [https://VoidCoder01.github.io/SOW](https://VoidCoder01.github.io/SOW)
 
 ### GitHub Actions
 - **File**: `.github/workflows/ci.yml`
