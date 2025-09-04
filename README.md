@@ -4,7 +4,7 @@ This is a simple project for testing CI/CD pipelines. It consists of an HTML das
 
 ## 🌐 **Live Demo**
 
-**🚀 Access your live dashboard:** [https://anushkap01patidar.github.io/SOW](https://anushkap01patidar.github.io/SOW)
+**🚀 Access your live dashboard:** [https://VoidCoder01.github.io/SOW](https://VoidCoder01.github.io/SOW)
 
 *Note: The dashboard updates automatically every time you push to the main branch!*
 
